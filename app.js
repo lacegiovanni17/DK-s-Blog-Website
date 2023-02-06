@@ -20,7 +20,7 @@ app.use(express.static("public"));
 let posts = []; 
 
 app.get("/", (req, res) => {
-  res.render("home", { homeStartingContent: homeStartingContent });
+  res.render("home", { homeStartingContent: homeStartingContent, posts: posts});
 });
 
 app.get("/about", (req, res) => {
@@ -29,7 +29,7 @@ app.get("/about", (req, res) => {
 
 app.get("/contact", (req, res) => {
   res.render("contact", { contactContent: contactContent });
-});
+});``
 
 app.get("/compose", (req, res) => {
   res.render("compose");

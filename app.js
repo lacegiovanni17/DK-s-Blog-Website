@@ -44,6 +44,21 @@ app.post("/compose", (req, res) => {
   res.redirect("/");
 })
 
+app.get("/posts/:postName", function (req, res) {
+  const requestedTitle = req.params.postName;
+
+  posts.forEach(function (post) {
+    const storedTitle = post.title;
+
+    if (storedTitle === requestedTitle) {
+      res.render("post", {
+        title: post.title,
+        content: post.content,
+      });
+    }
+  });  
+})
+
 app.listen(3000, function () {
   console.log("Server started on port 3000");
 });

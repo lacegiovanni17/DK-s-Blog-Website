@@ -3,6 +3,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const _ = require("lodash");
 
 const homeStartingContent =
   "Join millions of others, Whether sharing your expertise, breaking news, or whatever’s on your mind, you’re in good company on DK Daily Journal. Sign up to discover why millions of people have published their passions here. My name is Chidike Henry, and I am going to show you how to start blogging today. I have been building blogs and websites since 2002. In that time I have launched several of my own blogs, and helped hundreds of others do the same. I know that starting a blog can seem overwhelming and intimidating. This free guide is all about blogging for beginners, and will teach you how to become a blogger with just the most basic computer skills. So whether you’re 8 or 88, you can create your own blog in 20 minutes. I am not ashamed to admit that when I was first learning how to build a blog I made a ton of mistakes. You can benefit from more than a decade of my experience so that you don’t repeat these same mistakes when you make your own blog. I created this free blog webapp so that a complete beginner can learn how to blog quickly and easily.";
@@ -17,10 +18,13 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let posts = []; 
+let posts = [];
 
 app.get("/", (req, res) => {
-  res.render("home", { homeStartingContent: homeStartingContent, posts: posts});
+  res.render("home", {
+    homeStartingContent: homeStartingContent,
+    posts: posts,
+  });
 });
 
 app.get("/about", (req, res) => {
@@ -29,7 +33,8 @@ app.get("/about", (req, res) => {
 
 app.get("/contact", (req, res) => {
   res.render("contact", { contactContent: contactContent });
-});``
+});
+``;
 
 app.get("/compose", (req, res) => {
   res.render("compose");
@@ -42,13 +47,13 @@ app.post("/compose", (req, res) => {
   };
   posts.push(post);
   res.redirect("/");
-})
+});
 
 app.get("/posts/:postName", function (req, res) {
-  const requestedTitle = req.params.postName;
+  const requestedTitle = _.lowerCase(req.params.postName);
 
   posts.forEach(function (post) {
-    const storedTitle = post.title;
+    const storedTitle = _.lowerCase(post.title);
 
     if (storedTitle === requestedTitle) {
       res.render("post", {
@@ -56,8 +61,8 @@ app.get("/posts/:postName", function (req, res) {
         content: post.content,
       });
     }
-  });  
-})
+  });
+});
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");

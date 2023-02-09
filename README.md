@@ -14,8 +14,10 @@
 * CSS
 * HTML
 * JS
-* Bootstrap
 * EJS
+* Bootstrap
+* Express
+* Node.js
 * Git
 * GitHub
 

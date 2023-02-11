@@ -15,6 +15,7 @@
 * HTML
 * JS
 * EJS
+* Docker
 * Bootstrap
 * Express
 * Node.js
